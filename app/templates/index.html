@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<form action="{{ url_for('index') }}" method="POST"> <!-- генерация url для функции index -->
+    <div class="mb-3">
+      <label for="exampleInputSender" class="form-label">Отправитель</label>
+      <!-- имя, вводимое пользователем, станет значением словаря sender, если ничего не ввёл,
+            будет пустая строка -->
+      <input type="text" class="form-control" id="exampleInputSender" placeholder="Имя отправителя"
+      name="sender" value="{{ request.form.get('sender', '') }}">
+    </div>
+
+    <div class="mb-3">
+      <label for="exampleInputAmount" class="form-label">Сумма</label>
+      <input type="text" class="form-control" id="exampleInputAmount" placeholder="Сумма"
+      name="amount" value="{{ request.form.get('amount', '') }}">
+    </div>
+
+    <div class="mb-3">
+        <label for="exampleInputRecipient" class="form-label">Получатель</label>
+        <input type="text" class="form-control" id="exampleInputResipient" placeholder="Имя получателя"
+        name="recipient" value="{{ request.form.get('recipient', '') }}">
+      </div>
+
+    <button type="submit" class="btn btn-primary">Передать</button>
+  </form>
+
+{% endblock %}
+
+{% block checking %}
+
+    {% for res in results %}
+        <div class="result">
+
+            Блок {{ res['block'] }} : {{ res['result'] }}
+        
+        </div>
+    {% endfor %}
+
+{% endblock %}
